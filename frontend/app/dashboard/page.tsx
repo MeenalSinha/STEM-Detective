@@ -239,17 +239,17 @@ export default function DashboardPage() {
               </div>
               <div className="bg-[#0a0f12] rounded-lg overflow-hidden border border-[#1f2937] h-[200px] relative flex items-center justify-center shadow-inner">
                  <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40">
-                   <line x1="50%" y1="50%" x2="25%" y2="30%" stroke="#10b981" strokeWidth="1" strokeDasharray="3,3" />
-                   <line x1="50%" y1="50%" x2="75%" y2="30%" stroke="#f59e0b" strokeWidth="1" strokeDasharray="3,3" />
-                   <line x1="50%" y1="50%" x2="25%" y2="70%" stroke="#3b82f6" strokeWidth="1" strokeDasharray="3,3" />
-                   <line x1="50%" y1="50%" x2="75%" y2="70%" stroke="#a855f7" strokeWidth="1" strokeDasharray="3,3" />
+                   <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="#10b981" strokeWidth="1" strokeDasharray="3,3" />
+                   <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="#f59e0b" strokeWidth="1" strokeDasharray="3,3" />
+                   <line x1="50%" y1="50%" x2="25%" y2="75%" stroke="#3b82f6" strokeWidth="1" strokeDasharray="3,3" />
+                   <line x1="50%" y1="50%" x2="75%" y2="75%" stroke="#a855f7" strokeWidth="1" strokeDasharray="3,3" />
                  </svg>
-                 <div className="absolute top-[20%] left-[20%] text-center"><div className="w-8 h-8 rounded-full border border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] bg-[#061c13] mx-auto flex items-center justify-center"><Leaf size={14} className="text-emerald-500" /></div><p className="text-[9px] text-[#9ca3af] mt-1 font-mono">Food Chain</p></div>
-                 <div className="absolute top-[20%] right-[20%] text-center"><div className="w-8 h-8 rounded-full border border-orange-500 shadow-[0_0_10px_rgba(245,158,11,0.5)] bg-[#1c1106] mx-auto flex items-center justify-center"><Users size={14} className="text-orange-500" /></div><p className="text-[9px] text-[#9ca3af] mt-1 font-mono">Human Impact</p></div>
-                 <div className="absolute bottom-[20%] left-[20%] text-center"><div className="w-8 h-8 rounded-full border border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] bg-[#06111c] mx-auto flex items-center justify-center"><FlaskConical size={14} className="text-blue-500" /></div><p className="text-[9px] text-[#9ca3af] mt-1 font-mono">Pollution</p></div>
-                 <div className="absolute bottom-[20%] right-[20%] text-center"><div className="w-8 h-8 rounded-full border border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)] bg-[#13061c] mx-auto flex items-center justify-center"><Zap size={14} className="text-purple-500" /></div><p className="text-[9px] text-[#9ca3af] mt-1 font-mono">Water Quality</p></div>
+                 <div className="absolute top-[25%] left-[25%] -translate-x-1/2 -translate-y-1/2 text-center"><div className="w-8 h-8 rounded-full border border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] bg-[#061c13] mx-auto flex items-center justify-center"><Leaf size={14} className="text-emerald-500" /></div><p className="text-[9px] text-[#9ca3af] mt-1 font-mono whitespace-nowrap">Food Chain</p></div>
+                 <div className="absolute top-[25%] left-[75%] -translate-x-1/2 -translate-y-1/2 text-center"><div className="w-8 h-8 rounded-full border border-orange-500 shadow-[0_0_10px_rgba(245,158,11,0.5)] bg-[#1c1106] mx-auto flex items-center justify-center"><Users size={14} className="text-orange-500" /></div><p className="text-[9px] text-[#9ca3af] mt-1 font-mono whitespace-nowrap">Human Impact</p></div>
+                 <div className="absolute top-[75%] left-[25%] -translate-x-1/2 -translate-y-1/2 text-center"><div className="w-8 h-8 rounded-full border border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] bg-[#06111c] mx-auto flex items-center justify-center"><FlaskConical size={14} className="text-blue-500" /></div><p className="text-[9px] text-[#9ca3af] mt-1 font-mono whitespace-nowrap">Pollution</p></div>
+                 <div className="absolute top-[75%] left-[75%] -translate-x-1/2 -translate-y-1/2 text-center"><div className="w-8 h-8 rounded-full border border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)] bg-[#13061c] mx-auto flex items-center justify-center"><Zap size={14} className="text-purple-500" /></div><p className="text-[9px] text-[#9ca3af] mt-1 font-mono whitespace-nowrap">Water Quality</p></div>
                  
-                 <div className="absolute top-[40%] left-[42%] text-center z-10"><div className="w-12 h-12 rounded-full border border-green-400 shadow-[0_0_15px_rgba(74,222,128,0.8)] bg-[#051a0d] mx-auto flex items-center justify-center"><Network size={20} className="text-green-400" /></div><p className="text-[10px] text-green-400 font-bold mt-1 font-mono">Ecosystems</p></div>
+                 <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center z-10"><div className="w-12 h-12 rounded-full border border-green-400 shadow-[0_0_15px_rgba(74,222,128,0.8)] bg-[#051a0d] mx-auto flex items-center justify-center"><Network size={20} className="text-green-400" /></div><p className="text-[10px] text-green-400 font-bold mt-1 font-mono whitespace-nowrap bg-[#0a0f12]/80 px-1 rounded inline-block">Ecosystems</p></div>
               </div>
             </div>
 
