@@ -63,7 +63,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* Brand */}
         <div className="mb-10 flex flex-col items-center">
           <div className="w-24 h-24 rounded-full border border-[#4a3520] shadow-[0_4px_10px_rgba(0,0,0,0.8)] mb-4 overflow-hidden bg-black flex items-center justify-center">
-             <img src="/assets/raccoon-detective.webp" alt="STEM Detective" className="w-full h-full object-cover grayscale-[0.3]" />
+             <img src="/raccoon-detective.webp" alt="STEM Detective" className="w-full h-full object-cover grayscale-[0.3]" />
           </div>
           <h1 className="font-detective text-[#f5e6d3] text-2xl tracking-widest text-center font-bold">STEM DETECTIVE</h1>
           <p className="text-text-secondary text-[10px] mt-1 text-center font-mono tracking-widest uppercase">Multiverse of Mysteries</p>

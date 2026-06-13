@@ -144,7 +144,7 @@ export default function DashboardPage() {
           {/* AI Detective Assistant */}
           <div className="bg-[#1b1109] rounded-xl p-4 flex items-center gap-4 border border-[#4a3520] border-l-4 border-l-crimson-glow shadow-[0_4px_20px_rgba(0,0,0,0.8)]">
             <div className="w-14 h-14 rounded-full border border-[#4a3520] flex items-center justify-center flex-shrink-0 overflow-hidden bg-black">
-              <img src="/assets/raccoon-detective.webp" alt="AI" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = 'https://ui-avatars.com/api/?name=AI&background=1a1008&color=c8860a' }} />
+              <img src="/raccoon-detective.webp" alt="AI" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = 'https://ui-avatars.com/api/?name=AI&background=1a1008&color=c8860a' }} />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[#f5e6d3] font-bold text-sm">AI Detective Assistant</p>

@@ -110,8 +110,8 @@ export default function HomePage() {
       {/* ── Navigation ──────────────────────────────────────────── */}
       <nav className="relative z-20 flex items-center justify-between px-8 py-5 border-b border-border/50 backdrop-blur-sm">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-amber-glow/20 border border-amber-glow/40 flex items-center justify-center shadow-amber animate-pulse-amber">
-            <span className="display-text text-amber-glow font-black text-xl">S</span>
+          <div className="w-10 h-10 rounded-full bg-amber-glow/20 border border-amber-glow/40 flex items-center justify-center shadow-amber animate-pulse-amber overflow-hidden">
+            <img src="/raccoon-detective.webp" alt="STEM Detective" className="w-full h-full object-cover" />
           </div>
           <div>
             <p className="detective-text text-text-primary font-bold text-lg leading-none">STEM DETECTIVE</p>

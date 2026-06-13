@@ -89,8 +89,8 @@ export default function RegisterPage() {
         {/* Logo */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-6">
           <Link href="/" className="inline-flex flex-col items-center gap-2">
-            <div className="w-14 h-14 rounded-xl bg-black border-2 border-amber-glow flex items-center justify-center shadow-[0_0_15px_rgba(200,134,10,0.5)]">
-              <span className="font-detective text-amber-glow font-black text-3xl">S</span>
+            <div className="w-14 h-14 rounded-full bg-black border-2 border-amber-glow flex items-center justify-center shadow-[0_0_15px_rgba(200,134,10,0.5)] overflow-hidden">
+              <img src="/raccoon-detective.webp" alt="STEM Detective" className="w-full h-full object-cover" />
             </div>
             <p className="font-detective text-[#f5e6d3] font-bold text-xl uppercase tracking-widest">STEM DETECTIVE</p>
           </Link>

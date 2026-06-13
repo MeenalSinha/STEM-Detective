@@ -56,8 +56,8 @@ export default function LoginPage() {
           className="text-center mb-8"
         >
           <Link href="/" className="inline-flex flex-col items-center gap-2">
-            <div className="w-16 h-16 rounded-xl bg-black border-2 border-amber-glow flex items-center justify-center shadow-[0_0_15px_rgba(200,134,10,0.5)]">
-              <span className="font-detective text-amber-glow font-black text-4xl">S</span>
+            <div className="w-16 h-16 rounded-full bg-black border-2 border-amber-glow flex items-center justify-center shadow-[0_0_15px_rgba(200,134,10,0.5)] overflow-hidden">
+              <img src="/raccoon-detective.webp" alt="STEM Detective" className="w-full h-full object-cover" />
             </div>
             <div>
               <p className="font-detective text-[#f5e6d3] font-bold text-2xl leading-none uppercase tracking-widest">STEM DETECTIVE</p>
