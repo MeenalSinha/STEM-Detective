@@ -46,9 +46,9 @@ export default function LeaderboardPage() {
   const [search, setSearch] = useState('')
   const [tab, setTab] = useState<'global' | 'weekly' | 'subject'>('global')
 
-  const { data, isLoading } = useQuery<{ data: LeaderboardEntry[] }>({
+  const { data, isLoading } = useQuery({
     queryKey: ['leaderboard', tab],
-    queryFn: () => leaderboardApi.get(50),
+    queryFn: () => leaderboardApi.get(50) as Promise<{ data: LeaderboardEntry[] }>,
   })
 
   const rawEntries = data?.data || []

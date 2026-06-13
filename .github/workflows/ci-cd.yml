@@ -84,7 +84,8 @@ jobs:
     name: Deploy Frontend to Vercel
     needs: [backend-test, frontend-lint]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    # Only deploy when on main branch AND the VERCEL_TOKEN secret is configured
+    if: github.ref == 'refs/heads/main' && secrets.VERCEL_TOKEN != ''
     steps:
       - uses: actions/checkout@v4
       - name: Deploy to Vercel
@@ -100,7 +101,8 @@ jobs:
     name: Deploy Backend to Render
     needs: [backend-test]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    # Only deploy when on main branch AND the RENDER_DEPLOY_HOOK_URL secret is configured
+    if: github.ref == 'refs/heads/main' && secrets.RENDER_DEPLOY_HOOK_URL != ''
     steps:
       - name: Deploy to Render
         run: |

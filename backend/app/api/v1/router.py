@@ -8,6 +8,7 @@ from app.api.v1.endpoints.other import (
     leaderboard_router,
     teacher_router,
 )
+from app.api.v1.endpoints.multiplayer import router as multiplayer_router
 
 api_router = APIRouter()
 
@@ -18,6 +19,8 @@ api_router.include_router(evidence_router, prefix="/evidence", tags=["Evidence"]
 api_router.include_router(user_router, prefix="/users", tags=["Users & Stats"])
 api_router.include_router(leaderboard_router, prefix="/leaderboard", tags=["Leaderboard"])
 api_router.include_router(teacher_router, prefix="/teacher", tags=["Teacher Dashboard"])
+api_router.include_router(multiplayer_router, prefix="/multiplayer", tags=["Multiplayer"])
 
 from app.api.v1.endpoints.quiz import router as quiz_router
 api_router.include_router(quiz_router, prefix="/quiz", tags=["Proof of Learning"])
+
