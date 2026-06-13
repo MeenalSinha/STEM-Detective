@@ -112,16 +112,14 @@ export default function RegisterPage() {
         </div>
 
         <motion.div
-          key={step}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          className="evidence-card p-8 bg-[#1a120c] border-[#4a3520] shadow-[0_8px_30px_rgba(0,0,0,0.8)]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="evidence-card p-8 bg-[#1a120c] border-[#4a3520] shadow-[0_8px_30px_rgba(0,0,0,0.8)] overflow-hidden"
         >
           <AnimatePresence mode="wait">
             {/* Step 1: Role */}
             {step === 'role' && (
-              <motion.div key="role" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <motion.div key="role" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}>
                 <div className="mb-6 border-b border-[#3b2b1d] pb-4 text-center">
                   <h1 className="font-detective text-3xl font-bold text-[#f5e6d3] uppercase tracking-widest">Identify Subject</h1>
                   <p className="text-[#a39171] font-mono text-[10px] mt-2 uppercase tracking-widest">Select Operative Classification</p>
@@ -129,6 +127,7 @@ export default function RegisterPage() {
                 <div className="space-y-3">
                   {ROLE_OPTIONS.map((r) => (
                     <button
+                      type="button"
                       key={r.value}
                       onClick={() => { update('role', r.value); setStep('info') }}
                       className={`w-full p-4 rounded-sm border text-left transition-all hover:-translate-y-0.5 ${
@@ -153,54 +152,60 @@ export default function RegisterPage() {
 
             {/* Step 2: Info */}
             {step === 'info' && (
-              <motion.div key="info" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <motion.div key="info" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}>
                 <div className="mb-6 border-b border-[#3b2b1d] pb-4 text-center">
                   <h1 className="font-detective text-3xl font-bold text-[#f5e6d3] uppercase tracking-widest">Operative Data</h1>
                   <p className="text-[#a39171] font-mono text-[10px] mt-2 uppercase tracking-widest">Establish Clearance Credentials</p>
                 </div>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-[#d4b58e] font-mono text-[10px] font-bold uppercase tracking-widest mb-1.5">Full Name</label>
-                    <div className="relative">
-                      <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-glow" />
-                      <input className="input pl-9 font-detective text-sm uppercase bg-black border-[#4a3520]" placeholder="Jane Smith" value={form.full_name} onChange={(e) => update('full_name', e.target.value)} />
+                <form onSubmit={(e) => {
+                  e.preventDefault()
+                  if (!form.email || !form.username || !form.password) { toast.error('Fill all required fields'); return }
+                  setStep('grade')
+                }}>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-[#d4b58e] font-mono text-[10px] font-bold uppercase tracking-widest mb-1.5">Full Name</label>
+                      <div className="relative">
+                        <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-glow" />
+                        <input className="input pl-9 font-detective text-sm uppercase bg-black border-[#4a3520]" placeholder="Jane Smith" value={form.full_name} onChange={(e) => update('full_name', e.target.value)} />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-[#d4b58e] font-mono text-[10px] font-bold uppercase tracking-widest mb-1.5">Detective Alias (Username) *</label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-glow text-sm">🔍</span>
+                        <input className="input pl-9 font-detective text-sm uppercase bg-black border-[#4a3520]" placeholder="SherlockJr" value={form.username} onChange={(e) => update('username', e.target.value)} />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-[#d4b58e] font-mono text-[10px] font-bold uppercase tracking-widest mb-1.5">Email *</label>
+                      <div className="relative">
+                        <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-glow" />
+                        <input className="input pl-9 font-detective text-sm uppercase bg-black border-[#4a3520]" type="email" placeholder="detective@example.com" value={form.email} onChange={(e) => update('email', e.target.value)} />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-[#d4b58e] font-mono text-[10px] font-bold uppercase tracking-widest mb-1.5">Passcode *</label>
+                      <div className="relative">
+                        <Lock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-glow" />
+                        <input className="input pl-9 pr-10 font-detective text-sm uppercase bg-black border-[#4a3520]" type={showPw ? 'text' : 'password'} placeholder="Min. 8 characters" value={form.password} onChange={(e) => update('password', e.target.value)} />
+                        <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#a39171] hover:text-amber-glow">
+                          {showPw ? <EyeOff size={14} /> : <Eye size={14} />}
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <label className="block text-[#d4b58e] font-mono text-[10px] font-bold uppercase tracking-widest mb-1.5">Detective Alias (Username) *</label>
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-glow text-sm">🔍</span>
-                      <input className="input pl-9 font-detective text-sm uppercase bg-black border-[#4a3520]" placeholder="SherlockJr" value={form.username} onChange={(e) => update('username', e.target.value)} />
-                    </div>
+                  <div className="flex gap-3 mt-8">
+                    <button type="button" onClick={() => setStep('role')} className="btn-secondary flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-widest py-3 px-4"><ChevronLeft size={14} />Retreat</button>
+                    <button type="submit" className="btn-primary flex-1 flex items-center justify-center gap-1.5 text-sm font-bold uppercase tracking-widest py-3">Proceed<ChevronRight size={14} /></button>
                   </div>
-                  <div>
-                    <label className="block text-[#d4b58e] font-mono text-[10px] font-bold uppercase tracking-widest mb-1.5">Email *</label>
-                    <div className="relative">
-                      <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-glow" />
-                      <input className="input pl-9 font-detective text-sm uppercase bg-black border-[#4a3520]" type="email" placeholder="detective@example.com" value={form.email} onChange={(e) => update('email', e.target.value)} />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-[#d4b58e] font-mono text-[10px] font-bold uppercase tracking-widest mb-1.5">Passcode *</label>
-                    <div className="relative">
-                      <Lock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-glow" />
-                      <input className="input pl-9 pr-10 font-detective text-sm uppercase bg-black border-[#4a3520]" type={showPw ? 'text' : 'password'} placeholder="Min. 8 characters" value={form.password} onChange={(e) => update('password', e.target.value)} />
-                      <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#a39171] hover:text-amber-glow">
-                        {showPw ? <EyeOff size={14} /> : <Eye size={14} />}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-3 mt-8">
-                  <button onClick={() => setStep('role')} className="btn-secondary flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-widest py-3 px-4"><ChevronLeft size={14} />Retreat</button>
-                  <button onClick={() => { if (!form.email || !form.username || !form.password) { toast.error('Fill all required fields'); return } setStep('grade') }} className="btn-primary flex-1 flex items-center justify-center gap-1.5 text-sm font-bold uppercase tracking-widest py-3">Proceed<ChevronRight size={14} /></button>
-                </div>
+                </form>
               </motion.div>
             )}
 
             {/* Step 3: Grade */}
             {step === 'grade' && (
-              <motion.div key="grade" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <motion.div key="grade" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}>
                 <div className="mb-6 border-b border-[#3b2b1d] pb-4 text-center">
                   <h1 className="font-detective text-3xl font-bold text-[#f5e6d3] uppercase tracking-widest">Rank Assignment</h1>
                   <p className="text-[#a39171] font-mono text-[10px] mt-2 uppercase tracking-widest">Calibrate clearance for tailored assignments</p>
@@ -208,6 +213,7 @@ export default function RegisterPage() {
                 <div className="grid grid-cols-2 gap-3 mb-8">
                   {GRADE_OPTIONS.map((g) => (
                     <button
+                      type="button"
                       key={g.value}
                       onClick={() => update('grade_level', g.value)}
                       className={`p-4 rounded-sm border text-left transition-all hover:-translate-y-0.5 ${
@@ -223,8 +229,8 @@ export default function RegisterPage() {
                   ))}
                 </div>
                 <div className="flex gap-3">
-                  <button onClick={() => setStep('info')} className="btn-secondary flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-widest py-3 px-4"><ChevronLeft size={14} />Retreat</button>
-                  <button onClick={handleRegister} disabled={loading} className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-50 text-sm font-bold uppercase tracking-widest py-3">
+                  <button type="button" onClick={() => setStep('info')} className="btn-secondary flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-widest py-3 px-4"><ChevronLeft size={14} />Retreat</button>
+                  <button type="button" onClick={handleRegister} disabled={loading} className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-50 text-sm font-bold uppercase tracking-widest py-3">
                     {loading ? <><Loader2 size={15} className="animate-spin" />ENCRYPTING...</> : <><GraduationCap size={15} />FINALIZE CLEARANCE</>}
                   </button>
                 </div>
