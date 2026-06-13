@@ -5,7 +5,7 @@ Fallback: OpenAI GPT-4o (if OPENAI_API_KEY set)
 """
 import json
 import re
-from typing import Optional, AsyncGenerator
+from typing import Optional, AsyncGenerator, Callable
 from app.core.config import settings
 
 # ── Gemini Client (Primary) ────────────────────────────────────────────────────
@@ -52,7 +52,7 @@ def get_openai_client():
 
 # ── Core AI Caller ─────────────────────────────────────────────────────────────
 
-async def _call_ai(prompt: str, system: str) -> str:
+async def _call_ai(prompt: str, system: str, mock_fallback_func: Optional[Callable] = None) -> str:
     """Call AI: Gemini primary, OpenAI fallback."""
     full_prompt = f"{system}\n\n{prompt}\n\nRespond with valid JSON only. No markdown fences."
 
@@ -87,6 +87,8 @@ async def _call_ai(prompt: str, system: str) -> str:
             print(f"[OpenAI error] {oai_err}")
 
     # No AI available — return a graceful demo response
+    if mock_fallback_func:
+        return json.dumps(mock_fallback_func(prompt))
     return json.dumps(_demo_mystery_response())
 
 
@@ -172,6 +174,134 @@ def _demo_mystery_response() -> dict:
         },
         "thumbnail_description": "A wilting greenhouse with yellow plants under dim lights",
     }
+
+def _mock_dungeon_master_response(prompt: str) -> dict:
+    prompt_lower = prompt.lower()
+    if "water" in prompt_lower or "ph" in prompt_lower or "test" in prompt_lower:
+        return {
+            "narrative": "You carefully collect a sample of the irrigation water from the main reservoir. It looks clear, but a quick test reveals a startling truth: the pH is dangerously low.",
+            "new_clues": [{
+                "id": "mock_clue_water",
+                "title": "Acidic Water Source",
+                "description": "The irrigation water pH is 4.2.",
+                "stem_concept": "pH and Acidity",
+                "is_key_evidence": True
+            }],
+            "world_state_changes": {},
+            "stem_challenge": {
+                "question": "What is the optimal pH range for most plants?",
+                "type": "multiple_choice",
+                "options": ["pH 2-3", "pH 6-7", "pH 10-11"],
+                "hint": "Water needs to be near neutral."
+            },
+            "xp_earned": 50,
+            "is_plot_twist": False,
+            "plot_twist_description": None,
+            "investigation_progress_delta": 20
+        }
+    elif "rosa" in prompt_lower or "interview" in prompt_lower or "witness" in prompt_lower or "talk" in prompt_lower:
+        return {
+            "narrative": "Rosa Chen wipes dirt from her hands. 'I've never seen chlorosis spread this fast. It's not a light issue, the lamps are on timers. Something must be blocking their nutrient uptake.'",
+            "new_clues": [{
+                "id": "mock_clue_rosa",
+                "title": "Rosa's Testimony",
+                "description": "Light is not the issue; suspect nutrient blockage.",
+                "stem_concept": "Plant Biology",
+                "is_key_evidence": False
+            }],
+            "world_state_changes": {},
+            "stem_challenge": None,
+            "xp_earned": 25,
+            "is_plot_twist": False,
+            "plot_twist_description": None,
+            "investigation_progress_delta": 10
+        }
+    
+    return {
+        "narrative": "You investigate the area closely. The wilting plants look sad, their leaves yellowing from the edges inward. Something in the environment is definitely causing this chlorosis.",
+        "new_clues": [],
+        "world_state_changes": {},
+        "stem_challenge": None,
+        "xp_earned": 10,
+        "is_plot_twist": False,
+        "plot_twist_description": None,
+        "investigation_progress_delta": 5
+    }
+
+def _mock_analyze_evidence(prompt: str) -> dict:
+    return {
+        "relevance_score": 0.9,
+        "analysis": "This evidence strongly points toward environmental contamination affecting the chemical balance of the ecosystem.",
+        "detective_feedback": "Great find! This is a solid lead.",
+        "stem_concepts_present": ["Chemistry", "Environmental Science"],
+        "is_key_evidence": True,
+        "follow_up_suggestions": ["Test the pH of the water in the lab", "Check for industrial runoff"],
+        "accuracy_feedback": "Your interpretation aligns with scientific principles."
+    }
+
+def _mock_generate_hint(prompt: str) -> dict:
+    return {
+        "hint_text": "Remember that photosynthesis requires not just light and CO2, but also proper water chemistry. What might prevent a plant's roots from absorbing nutrients?",
+        "hint_level": 2,
+        "xp_penalty": 20
+    }
+
+def _mock_evaluate_hypothesis(prompt: str) -> dict:
+    return {
+        "is_correct": True,
+        "score": 0.95,
+        "feedback": "Outstanding deduction, Detective! You successfully identified the root cause of the greenhouse crisis.",
+        "what_was_right": ["Identified acidic water", "Connected pH to nutrient lockout", "Recognized chlorosis"],
+        "what_was_wrong": [],
+        "solution_explanation": "Industrial runoff lowered the groundwater pH to 4.2. In highly acidic environments, plants suffer from 'nutrient lockout', rendering them unable to absorb nitrogen and magnesium essential for chlorophyll synthesis, thus stopping photosynthesis.",
+        "concepts_learned": ["Photosynthesis", "pH Scale", "Nutrient Absorption"],
+        "xp_earned": 500
+    }
+
+def _mock_generate_experiment(prompt: str) -> dict:
+    return {
+        "experiment_name": "pH and Nutrient Solubility Test",
+        "procedure": ["Add water sample to beaker", "Insert digital pH meter", "Add universal indicator"],
+        "variables": {
+            "independent": "Water Source",
+            "dependent": "pH Level",
+            "controlled": ["Temperature", "Volume"]
+        },
+        "results": {
+            "raw_data": {"pH": 4.2, "color": "red/orange"},
+            "observations": ["The indicator turned orange-red, confirming high acidity."],
+            "data_points": []
+        },
+        "conclusion": "The water supply is highly acidic (pH 4.2), which prevents plants from absorbing essential nutrients.",
+        "is_hypothesis_supported": True,
+        "feedback": "Excellent lab work! Your experiment confirms the hypothesis.",
+        "stem_concepts_reinforced": ["Acids and Bases", "pH indicators"],
+        "visualization_data": {"chart_type": "bar", "labels": ["Sample A", "Standard"], "values": [4.2, 7.0]},
+        "xp_earned": 150
+    }
+
+def _mock_generate_mystery_studio(prompt: str) -> dict:
+    return {
+        "mystery": _demo_mystery_response(),
+        "teacher_guide": {
+            "pre_lesson_prep": ["Print pH scale charts"],
+            "discussion_questions": ["How does pH affect plants?"],
+            "key_concepts_to_emphasize": ["Photosynthesis", "Acidity"],
+            "common_misconceptions": ["All plants like the same water"],
+            "differentiation_tips": {
+                "struggling_students": ["Provide hint cards"],
+                "advanced_students": ["Ask them to calculate hydrogen ion concentration"]
+            }
+        },
+        "assessment": {
+            "formative": ["Why are the leaves yellow?"],
+            "summative": ["Explain nutrient lockout"],
+            "rubric": {"scientific_reasoning": "Uses data", "evidence_use": "Cites pH", "hypothesis_quality": "Testable"}
+        },
+        "extension_activities": ["Test local soil samples"],
+        "curriculum_standards": ["NGSS MS-LS1-6", "NGSS MS-PS1-2"]
+    }
+
 
 
 # ── System Prompts ─────────────────────────────────────────────────────────────
@@ -346,7 +476,7 @@ Respond with JSON:
   "investigation_progress_delta": 5
 }}"""
 
-    raw = await _call_ai(prompt, DUNGEON_MASTER_SYSTEM)
+    raw = await _call_ai(prompt, DUNGEON_MASTER_SYSTEM, mock_fallback_func=_mock_dungeon_master_response)
     return json.loads(raw)
 
 
@@ -389,7 +519,7 @@ Return JSON:
   "accuracy_feedback": "If student interpretation provided, is it accurate?"
 }}"""
 
-    raw = await _call_ai(prompt, "You are a forensic scientist and STEM educator. Respond with valid JSON only.")
+    raw = await _call_ai(prompt, "You are a forensic scientist and STEM educator. Respond with valid JSON only.", mock_fallback_func=_mock_analyze_evidence)
     return json.loads(raw)
 
 
@@ -421,7 +551,7 @@ Return JSON:
   "xp_penalty": {hint_level * 10}
 }}"""
 
-    raw = await _call_ai(prompt, "You are a STEM tutor. Use the Socratic method. Never give direct answers. Respond with valid JSON only.")
+    raw = await _call_ai(prompt, "You are a STEM tutor. Use the Socratic method. Never give direct answers. Respond with valid JSON only.", mock_fallback_func=_mock_generate_hint)
     return json.loads(raw)
 
 
@@ -451,7 +581,7 @@ Evaluate objectively. Return JSON:
   "xp_earned": 200
 }}"""
 
-    raw = await _call_ai(prompt, "You are a STEM educator evaluating student work. Be encouraging but accurate. Respond with valid JSON only.")
+    raw = await _call_ai(prompt, "You are a STEM educator evaluating student work. Be encouraging but accurate. Respond with valid JSON only.", mock_fallback_func=_mock_evaluate_hypothesis)
     return json.loads(raw)
 
 
@@ -495,7 +625,7 @@ Return JSON:
   "xp_earned": 75
 }}"""
 
-    raw = await _call_ai(prompt, "You are a virtual lab assistant. Simulate realistic experiments with real science. Respond with valid JSON only.")
+    raw = await _call_ai(prompt, "You are a virtual lab assistant. Simulate realistic experiments with real science. Respond with valid JSON only.", mock_fallback_func=_mock_generate_experiment)
     return json.loads(raw)
 
 
@@ -553,5 +683,5 @@ Return a comprehensive JSON mystery package:
   "curriculum_standards": ["Related standards this addresses"]
 }}"""
 
-    raw = await _call_ai(prompt, "You are an expert curriculum designer and science educator. Create pedagogically sound mysteries. Respond with valid JSON only.")
+    raw = await _call_ai(prompt, "You are an expert curriculum designer and science educator. Create pedagogically sound mysteries. Respond with valid JSON only.", mock_fallback_func=_mock_generate_mystery_studio)
     return json.loads(raw)
