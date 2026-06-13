@@ -64,8 +64,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* Logo */}
         <div className="p-5 border-b border-border">
           <Link href="/dashboard" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-lg bg-amber-glow/20 border border-amber-glow/40 flex items-center justify-center flex-shrink-0">
-              <span className="display-text text-amber-glow font-bold">S</span>
+            <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-amber-glow/50 flex-shrink-0 bg-[#1a120c]">
+              <img src="/raccoon-detective.webp" alt="STEM Detective" className="w-full h-full object-cover" />
             </div>
             <div>
               <p className="detective-text text-text-primary font-bold text-sm leading-none">STEM DETECTIVE</p>
