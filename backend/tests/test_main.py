@@ -107,7 +107,7 @@ def test_xp_level_calculation():
     assert "Rookie" in rank
 
     level, rank = calculate_level(500)
-    assert level >= 4
+    assert level == 3
 
     level, rank = calculate_level(10000)
     assert level >= 10

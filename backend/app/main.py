@@ -14,6 +14,10 @@ logger = structlog.get_logger()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Starting STEM Detective API", environment=settings.ENVIRONMENT)
+    # Ensure pgvector extension exists
+    from sqlalchemy import text
+    with engine.begin() as conn:
+        conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
     # Create tables
     Base.metadata.create_all(bind=engine)
     # Seed achievements
