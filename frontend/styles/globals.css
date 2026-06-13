@@ -151,7 +151,7 @@ body {
   /* Torn paper / evidence card effect */
   .evidence-card {
     @apply relative bg-[#2a1e12] border border-[#3b2b1d] rounded p-3 shadow-card
-           before:absolute before:inset-0 before:rounded before:bg-amber-glow/5;
+           before:absolute before:inset-0 before:rounded before:bg-amber-glow/5 before:pointer-events-none;
   }
 
   /* Polaroid Photo Style */
