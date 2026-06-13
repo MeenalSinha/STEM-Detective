@@ -1,0 +1,344 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Special+Elite&display=swap');
+
+:root {
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-jetbrains: 'JetBrains Mono', Consolas, monospace;
+  --font-special-elite: 'Special Elite', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #110a05;
+  color: #f4ded0;
+  font-family: var(--font-inter);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: radial-gradient(circle at top right, rgba(200,134,10,0.05), transparent 40%),
+                    radial-gradient(circle at bottom left, rgba(20,10,5,0.9), transparent 70%);
+  background-attachment: fixed;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #221508;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8a5c06;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c8860a;
+}
+
+/* Selection */
+::selection {
+  background: rgba(200, 134, 10, 0.3);
+  color: #f5e6c8;
+}
+
+/* Global card style */
+@layer components {
+  .card {
+    @apply bg-bg-secondary border border-border rounded-lg shadow-card;
+  }
+
+  .glass-panel {
+    background-color: rgba(45, 28, 10, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(200, 134, 10, 0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+
+  .card-elevated {
+    @apply bg-bg-tertiary border border-border rounded-lg shadow-card;
+  }
+
+  .btn-primary {
+    @apply bg-transparent border border-amber-glow text-amber-glow font-bold px-4 py-2 rounded transition-all duration-200 uppercase tracking-widest text-xs
+           hover:bg-amber-glow hover:text-white hover:shadow-[0_0_15px_rgba(200,134,10,0.5)] active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-bg-tertiary border border-border text-[#a39171] font-bold px-4 py-2 rounded uppercase tracking-widest text-xs
+           transition-all duration-200 hover:border-amber-dim hover:text-amber-light active:scale-95;
+  }
+
+  .btn-danger {
+    @apply bg-crimson text-white font-medium px-4 py-2 rounded transition-all duration-200
+           hover:bg-crimson-light active:scale-95;
+  }
+
+  .input {
+    @apply bg-bg-tertiary border border-border rounded px-3 py-2 text-text-primary
+           placeholder:text-text-muted focus:outline-none focus:border-amber-dim
+           transition-colors duration-200 w-full;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium;
+  }
+
+  .badge-environmental {
+    @apply badge bg-subject-environmental/20 text-subject-environmental border border-subject-environmental/30;
+  }
+
+  .badge-physics {
+    @apply badge bg-subject-physics/20 text-subject-physics border border-subject-physics/30;
+  }
+
+  .badge-chemistry {
+    @apply badge bg-subject-chemistry/20 text-subject-chemistry border border-subject-chemistry/30;
+  }
+
+  .badge-biology {
+    @apply badge bg-subject-biology/20 text-subject-biology border border-subject-biology/30;
+  }
+
+  .badge-mathematics {
+    @apply badge bg-subject-mathematics/20 text-subject-mathematics border border-subject-mathematics/30;
+  }
+
+  .xp-bar {
+    @apply h-1.5 rounded-full bg-bg-overlay overflow-hidden;
+  }
+
+  .xp-bar-fill {
+    @apply h-full rounded-full bg-gradient-to-r from-amber-glow to-amber-light transition-all duration-700;
+  }
+
+  .section-title {
+    @apply text-text-secondary text-xs font-semibold tracking-widest uppercase;
+  }
+
+  .detective-text {
+    font-family: var(--font-special-elite);
+  }
+
+  .display-text {
+    font-family: var(--font-playfair);
+  }
+
+  .mono-text {
+    font-family: var(--font-jetbrains);
+  }
+
+  /* Pin/tack decoration for evidence board */
+  .pin {
+    @apply w-3 h-3 rounded-full bg-crimson-glow shadow-crimson absolute -top-1.5 left-1/2 -translate-x-1/2 z-10;
+  }
+
+  /* Torn paper / evidence card effect */
+  .evidence-card {
+    @apply relative bg-[#2a1e12] border border-[#3b2b1d] rounded p-3 shadow-card
+           before:absolute before:inset-0 before:rounded before:bg-amber-glow/5;
+  }
+
+  /* Polaroid Photo Style */
+  .polaroid-card {
+    @apply bg-[#f8f9fa] p-3 shadow-[4px_6px_12px_rgba(0,0,0,0.6)] relative transition-transform hover:-translate-y-1 hover:shadow-[6px_8px_16px_rgba(0,0,0,0.7)] cursor-pointer;
+  }
+
+  /* Corkboard Panel */
+  .corkboard-panel {
+    @apply corkboard rounded-xl relative border-[6px] border-[#221508] shadow-inner overflow-hidden;
+  }
+
+  /* Red string connector */
+  .string-line {
+    @apply absolute bg-crimson-light/60 h-px origin-left pointer-events-none;
+  }
+
+  /* Glow text */
+  .text-glow-amber {
+    text-shadow: 0 0 20px rgba(200, 134, 10, 0.6);
+  }
+
+  .text-glow-red {
+    text-shadow: 0 0 20px rgba(200, 30, 30, 0.6);
+  }
+
+  /* Loading shimmer */
+  .shimmer {
+    @apply relative overflow-hidden;
+    background: linear-gradient(90deg, #221508 0%, #3a2410 50%, #221508 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}
+
+/* Framer Motion page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* React Flow custom styles */
+.react-flow__background {
+  background-color: #1a1008 !important;
+}
+
+.react-flow__edge-path {
+  stroke: #8a5c06 !important;
+  stroke-width: 1.5 !important;
+}
+
+.react-flow__node {
+  border-radius: 50% !important;
+}
+
+/* Print styles for teacher export */
+@media print {
+  body { background: white; color: black; }
+  .no-print { display: none; }
+}
+
+/* ── Accessibility Modes ─────────────────────────────────────────── */
+
+/* High contrast mode */
+body.high-contrast {
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #111111;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #eeeeee;
+  --color-amber-glow: #ffff00;
+  --color-border: #ffffff;
+}
+
+/* Dyslexia font */
+body.dyslexia-font {
+  font-family: 'Comic Sans MS', 'OpenDyslexic', cursive !important;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce), body.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Colorblind modes */
+body.colorblind-deuteranopia {
+  filter: url('#deuteranopia-filter');
+}
+body.colorblind-protanopia {
+  filter: url('#protanopia-filter');
+}
+
+/* ── Extra utility classes ───────────────────────────────────────── */
+
+.shadow-amber-strong {
+  box-shadow: 0 0 30px rgba(200, 134, 10, 0.4), 0 4px 16px rgba(0,0,0,0.6);
+}
+
+.shadow-crimson {
+  box-shadow: 0 0 10px rgba(196, 46, 46, 0.5);
+}
+
+.text-glow-amber {
+  text-shadow: 0 0 30px rgba(200, 134, 10, 0.6), 0 0 60px rgba(200, 134, 10, 0.3);
+}
+
+/* Detective typewriter cursor */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink::after {
+  content: '|';
+  color: #c8860a;
+  animation: cursor-blink 1s infinite;
+  margin-left: 2px;
+}
+
+/* Corkboard texture pattern */
+.corkboard {
+  background-color: #2d1c0a;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(200,134,10,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,80,6,0.04) 0%, transparent 60%);
+}
+
+/* Animated border glow */
+@keyframes border-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(200,134,10,0.2); }
+  50% { box-shadow: 0 0 15px rgba(200,134,10,0.5); }
+}
+.border-glow-pulse {
+  animation: border-glow 2s ease-in-out infinite;
+}
+
+/* Crime scene tape pattern */
+.crime-tape {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(200,134,10,0.1) 0px,
+    rgba(200,134,10,0.1) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+/* Loading shimmer enhancement */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(200,134,10,0.05) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* Float animation for icons */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float-gentle {
+  animation: float-gentle 3s ease-in-out infinite;
+}
+
+/* XP pop animation */
+@keyframes xp-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+.xp-pop {
+  animation: xp-pop 0.4s ease-out;
+}
+
