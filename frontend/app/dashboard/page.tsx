@@ -290,7 +290,7 @@ export default function DashboardPage() {
                   </div>
                 ))}
               </div>
-              <Link href="/achievements" className="bg-[#2a1e12] hover:bg-[#3b2b1d] text-[#d4b58e] text-center border border-[#4a3520] rounded-lg py-1.5 mt-4 text-[10px] font-bold uppercase tracking-widest transition-colors">
+              <Link href="/missions" className="bg-[#2a1e12] hover:bg-[#3b2b1d] text-[#d4b58e] text-center border border-[#4a3520] rounded-lg py-1.5 mt-4 text-[10px] font-bold uppercase tracking-widest transition-colors">
                 View All Missions
               </Link>
             </div>
