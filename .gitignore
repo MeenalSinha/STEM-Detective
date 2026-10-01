@@ -1,0 +1,54 @@
+# Backend
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/.env
+backend/venv/
+backend/.venv/
+backend/*.egg-info/
+backend/dist/
+backend/build/
+backend/.pytest_cache/
+backend/test.db
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/.vercel/
+frontend/coverage/
+
+# General
+.DS_Store
+*.log
+*.swp
+*.swo
+.idea/
+.vscode/settings.json
+*.pem
+
+# Docker
+*.override.yml
+
+# Secrets (never commit)
+.env
+*.env
+!.env.example
+frontend/.env
+frontend/tsconfig.tsbuildinfo
+
+# Mobile build artifacts
+frontend/android/.gradle/
+frontend/android/build/
+frontend/android/app/build/
+frontend/android/local.properties
+frontend/android/app/src/main/assets/public/
+frontend/ios/App/Pods/
+frontend/ios/App/App/public/
+frontend/ios/DerivedData/
+*.keystore
+*.jks

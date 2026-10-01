@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "outputDirectory": "out",
+  "env": {
+    "NEXT_PUBLIC_API_URL": "@stem_detective_api_url"
+  }
+}

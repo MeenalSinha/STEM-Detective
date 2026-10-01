@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">STEM Detective</string>
+    <string name="title_activity_main">STEM Detective</string>
+    <string name="package_name">com.stemdetective.app</string>
+    <string name="custom_url_scheme">com.stemdetective.app</string>
+</resources>
